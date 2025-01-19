@@ -1,15 +1,13 @@
 cmake_minimum_required(VERSION 3.1)
 
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../cimgui ./cimgui)
+
 project(cimplot)
 
 #general settings
 file(GLOB IMGUI_SOURCES
-    ../cimgui/cimgui.cpp
-    ../cimgui/imgui/imgui.cpp
-    ../cimgui/imgui/imgui_draw.cpp
-    ../cimgui/imgui/imgui_demo.cpp
-    ../cimgui/imgui/imgui_widgets.cpp
-	../cimgui/imgui/imgui_tables.cpp
+    ../cimgui/cimgui.h
+    ../cimgui/imgui/imgui.h
 	cimplot.cpp
 	implot/implot.cpp
 	implot/implot_demo.cpp
@@ -33,6 +31,7 @@ target_compile_definitions(cimplot PUBLIC IMGUI_DISABLE_OBSOLETE_FUNCTIONS=1)
 target_include_directories(cimplot PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/implot)
 target_include_directories(cimplot PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../cimgui/imgui)
 target_include_directories(cimplot PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../cimgui)
+target_link_libraries(cimplot PRIVATE cimgui)
 set_target_properties(cimplot PROPERTIES PREFIX "")
 
 #install
